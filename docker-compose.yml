@@ -32,7 +32,7 @@ services:
       - pwa
     environment:
       PWA_UPSTREAM: pwa:3000
-      SERVER_NAME: ${SERVER_NAME:-localhost, caddy:80}
+      SERVER_NAME: ${SERVER_NAME:-localhost, :80}
       MERCURE_PUBLISHER_JWT_KEY: ${MERCURE_PUBLISHER_JWT_KEY:-!ChangeMe!}
       MERCURE_SUBSCRIBER_JWT_KEY: ${MERCURE_SUBSCRIBER_JWT_KEY:-!ChangeMe!}
     restart: unless-stopped
@@ -45,14 +45,6 @@ services:
       - target: 80
         published: 80
         protocol: tcp
-      # HTTPS
-      - target: 443
-        published: 443
-        protocol: tcp
-      # HTTP/3
-      - target: 443
-        published: 443
-        protocol: udp
 
   database:
     image: postgres:13-alpine

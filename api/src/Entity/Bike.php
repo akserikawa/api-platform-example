@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BikeRepository;
-use Symfony\Component\Validator\Constraints\Uuid;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 
 /**
+ * @ApiResource()
  * @ORM\Table("bikes")
  * @ORM\Entity(repositoryClass=BikeRepository::class)
  */
