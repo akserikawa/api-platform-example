@@ -26,9 +26,10 @@ class Bike
     private Uuid $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="bikes")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private string $brand;
+    private Brand $brand;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -45,12 +46,12 @@ class Bike
         return $this->id;
     }
 
-    public function getBrand(): ?string
+    public function getBrand(): ?Brand
     {
         return $this->brand;
     }
 
-    public function setBrand(string $brand): self
+    public function setBrand(?Brand $brand): self
     {
         $this->brand = $brand;
 
