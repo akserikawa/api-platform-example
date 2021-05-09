@@ -8,10 +8,14 @@ use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BikeRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"="bike.read"},
+ *      denormalizationContext={"groups"="bike.write"}
+ * )
  * @ORM\Table("bikes")
  * @ORM\Entity(repositoryClass=BikeRepository::class)
  */
@@ -22,22 +26,26 @@ class Bike
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
+     * @Groups({"bike.read"})
      */
     private Uuid $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="bikes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"bike.read"})
      */
     private Brand $brand;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"bike.read", "bikes.write"})
      */
     private string $model;
 
     /**
      * @ORM\Column(type="string", length=4)
+     * @Groups({"bike.read", "bikes.write"})
      */
     private string $year;
 
