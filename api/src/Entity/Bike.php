@@ -33,19 +33,19 @@ class Bike
     /**
      * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="bikes")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"bike.read"})
+     * @Groups({"bike.read", "bike.write"})
      */
     private Brand $brand;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"bike.read", "bikes.write"})
+     * @Groups({"bike.read", "bike.write"})
      */
     private string $model;
 
     /**
      * @ORM\Column(type="string", length=4)
-     * @Groups({"bike.read", "bikes.write"})
+     * @Groups({"bike.read", "bike.write"})
      */
     private string $year;
 
