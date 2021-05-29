@@ -6,16 +6,15 @@ namespace App\Entity;
 
 use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\BikeRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 
 /**
  * @ApiResource()
- * @ORM\Table("bikes")
- * @ORM\Entity(repositoryClass=BikeRepository::class)
+ * @ORM\Entity
+ * @ORM\Table("movies")
  */
-class Bike
+class Movie
 {
     /**
      * @ORM\Id
@@ -26,15 +25,20 @@ class Bike
     private Uuid $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="bikes")
+     * @ORM\ManyToOne(targetEntity=Director::class, inversedBy="movies")
      * @ORM\JoinColumn(nullable=false)
      */
-    private Brand $brand;
+    private Director $director;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $model;
+    private string $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private ?string $synopsis;
 
     /**
      * @ORM\Column(type="string", length=4)
@@ -46,26 +50,38 @@ class Bike
         return $this->id;
     }
 
-    public function getBrand(): ?Brand
+    public function getDirector(): ?Director
     {
-        return $this->brand;
+        return $this->director;
     }
 
-    public function setBrand(?Brand $brand): self
+    public function setDirector(?Director $director): self
     {
-        $this->brand = $brand;
+        $this->director = $director;
 
         return $this;
     }
 
-    public function getModel(): ?string
+    public function getTitle(): ?string
     {
-        return $this->model;
+        return $this->title;
     }
 
-    public function setModel(string $model): self
+    public function setTitle(string $title): self
     {
-        $this->model = $model;
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSynopsis(): ?string
+    {
+        return $this->synopsis;
+    }
+
+    public function setSynopsis(string $synopsis): self
+    {
+        $this->synopsis = $synopsis;
 
         return $this;
     }
