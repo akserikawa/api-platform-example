@@ -49,7 +49,7 @@ services:
   database:
     image: postgres:13-alpine
     environment:
-      - POSTGRES_DB=bikesapi
+      - POSTGRES_DB=moviesapi
       - POSTGRES_PASSWORD=!ChangeMe!
       - POSTGRES_USER=api-platform
     volumes:
