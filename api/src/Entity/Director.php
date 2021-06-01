@@ -8,6 +8,7 @@ use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 
@@ -37,6 +38,7 @@ class Director
     private string $lastName;
 
     /**
+     * @ApiSubresource
      * @ORM\OneToMany(targetEntity=Movie::class, mappedBy="director")
      */
     private Collection $movies;
