@@ -7,6 +7,8 @@
             experimental_http3
         }
     }
+
+    auto_https off
 }
 
 {$SERVER_NAME}
